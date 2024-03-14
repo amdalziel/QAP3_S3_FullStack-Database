@@ -1,0 +1,11 @@
+{
+  "name": "qap3_s3_fullstack-database",
+  "version": "1.0.0",
+  "description": "Travel Bug Application - for people who love to travel",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amy Dalziel",
+  "license": "MIT"
+}

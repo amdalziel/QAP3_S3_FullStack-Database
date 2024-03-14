@@ -1,0 +1,1 @@
+INSERT INTO public."Profiles"(username, destination, hobbies) VALUES ('amydal', 'London', ARRAY['classical music', 'hiking']);
