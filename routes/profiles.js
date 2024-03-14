@@ -4,9 +4,9 @@ const profilesDal = require('../services/DAL/pg.travelbug_dal');
 router.get('/', async (req, res) => {
 
     try {
-        let theProfiles = await profilesDal.getProfiles(); 
-        if(DEBUG) console.table(theProfiles); 
-        res.render('profiles', {theProfiles}); 
+        const getProfiles = await profilesDal.getProfiles(); 
+        if(DEBUG) console.table(getProfiles); 
+        res.render('profiles', {profiles: getProfiles}); 
         
     } catch (error) {
         res.render('503'); 

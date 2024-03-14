@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0px; 
+    font-family: 'Avenir';
+}
+
+#header-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#header-box h1{
+    color: white; 
+
+}
+
+#header-box a{
+    color: white; 
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 30px;
+
+}
+

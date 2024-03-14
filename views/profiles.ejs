@@ -1,4 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />  
+    <link rel="stylesheet" type="text/css" href="/css/partials.css" />  
 
-<h2> Profiles will go here</h2>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <title>Profiles</title>
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+
+</script>
+</head>
+<body>
+
+    <div id="banner-profiles">
+ 
+        <%- include('./partials/header.ejs') %>
+
+        <div id="banner-profiles-overlay"></div>
+        <h2>Find Your Next Adventure</h2>
+    </div>
+
+   
+
+    <main>
+
+  
+       
+        <h3>Meet Our Travel Bugs</h3>
+        <div id="profile-section">
+        <% profiles.forEach((profile, i) => { %>
+            <div class="user-profile">
+                <!-- <img src="/images/productImage/aleProduct<%= i + 1 %>.jpg" alt="Ale Image" width="300px"> -->
+            <p class="user-username"><%= profile.username %></p>
+            <p class="user-destination"><%= profile.destination %></p>
+            <p class="user-hobbies"><%= profile.hobbies %></p>
+            </div>
+        <% }); %>
+    </div>
+
+
+
+
+    </main>
+
+
+    <script src="js/profilesFrontEnd.js"></script>
+    
+</body>
 </html>
