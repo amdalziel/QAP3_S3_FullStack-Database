@@ -11,6 +11,22 @@
     justify-content: space-between;
 }
 
+
+.user-destination-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-hobbies-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-username-div{
+    display: flex;
+    flex-direction: row;
+}
+
 .user-profile{
 
     background-color: white;
