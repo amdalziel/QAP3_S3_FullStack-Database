@@ -30,6 +30,7 @@ router.get('/:id/edit', async (req, res) => {
   router.post('/', async (req, res) => {
     if(DEBUG) console.log("profiles.POST");
     try {
+        if(DEBUG) console.log(req.body.destination); 
         await profilesDal.addProfile(req.body.username, req.body.destination, req.body.hobbies);
         res.redirect('/profiles');
     } catch (err){

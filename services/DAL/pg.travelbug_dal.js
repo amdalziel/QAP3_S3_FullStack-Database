@@ -38,10 +38,16 @@ var getProfileByProfileID = function(id) {
 
 var addProfile = function(username, destination, hobbies) {
   if(DEBUG) console.log("profiles.pg.dal.addProfile()");
+
+  let trimmedDestination = destination.trim();
+  let formattedDestination = trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+  console.log(formattedDestination); 
+
+if(DEBUG) console.log(`Reformatted destination to pass validation: ` + formattedDestination); 
   return new Promise(function(resolve, reject) {
     const sql = `INSERT INTO public."Profiles" (username, destination, hobbies) \
     values ($1, $2, Array[$3]);`;
-    dal.query(sql, [username, destination, hobbies], (err, result) => {
+    dal.query(sql, [username, formattedDestination, hobbies], (err, result) => {
       if (err) {
           if(DEBUG) console.log(err);
           reject(err);

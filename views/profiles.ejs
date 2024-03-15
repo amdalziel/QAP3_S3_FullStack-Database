@@ -34,21 +34,23 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
         <div id="create-profile-div">
 
-        <form action = '/profiles' method="POST">
+        <form id="create-user-form" action = '/profiles' method="POST">
 
             <h3>Create a Profile: </h3>
 
-            <label>Username:
-                <input type="text" id="username" name="username" value="<%= locals.username %>" required>
-            </label>
-            <label>Destination:
-                <input type="text" id="destination" name="destination" value="<%= locals.destination %>" required>
-            </label>
-            <label>Hobbies:
-                <input type="text" id="hobbies" name="hobbies" value="<%= locals.hobbies %>" >
-            </label>
+            <h4>Avaliable Cities: London, Paris, Barcelona, Dubrovnik, Reykjavík, Amsterdam, Venice, Berlin</h4>
+
+            <label>Username:    </label>
+                <input type="text" id="form-username" name="username" value="<%= locals.username %>" required>
+        
+                <label>Destination:    </label>
+                <input type="text" id="form-destination" name="destination" value="<%= locals.destination %>" required>
+
+            <label>Hobbies:</label>
+                <input type="text" id="form-hobbies" name="hobbies" value="<%= locals.hobbies %>" >
+          
        
-            <button>CREATE</button>
+            <input type="submit" value="Submit">
 
 
         </form>

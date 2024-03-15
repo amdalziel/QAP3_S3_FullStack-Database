@@ -7,7 +7,7 @@ CREATE TABLE public."Profiles"
     PRIMARY KEY (id),
     CONSTRAINT uq_profiles_username UNIQUE (username),
     CONSTRAINT check_destination_in_list CHECK (
-        destination IN ('London', 'Paris', 'Barcelona', 'Dubrovnik', 'Reykjavík', 'Amsterdam', 'Venice', 'Berlin')
+        destination IN ('London', 'Paris', 'Barcelona', 'Dubrovnik', 'Reykjavik', 'Amsterdam', 'Venice', 'Berlin')
     )
 );
 
