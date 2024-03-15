@@ -36,25 +36,60 @@ var getProfileByProfileID = function(id) {
   }); 
 };
 
+// var addProfile = function(username, destination, hobbies) {
+//   if(DEBUG) console.log("profiles.pg.dal.addProfile()");
+
+//   let trimmedDestination = destination.trim();
+//   let formattedDestination = trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+//   if(DEBUG) console.log(formattedDestination); 
+
+// if(DEBUG) console.log(`Reformatted destination to pass validation: ` + formattedDestination); 
+//   return new Promise(function(resolve, reject) {
+//     const sql = `INSERT INTO public."Profiles" (username, destination, hobbies) \
+//     values ($1, $2, Array[$3]);`;
+//     dal.query(sql, [username, formattedDestination, hobbies], (err, result) => {
+//       if (err) {
+//           if(DEBUG) console.log(err);
+//           reject(err);
+//         } else {
+//           resolve(result.rows);
+//         }
+//     }); 
+//   });
+// };
+
 var addProfile = function(username, destination, hobbies) {
-  if(DEBUG) console.log("profiles.pg.dal.addProfile()");
+  if (DEBUG) console.log("profiles.pg.dal.addProfile()");
 
   let trimmedDestination = destination.trim();
-  let formattedDestination = trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
-  console.log(formattedDestination); 
+  let formattedDestination =
+    trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+  if (DEBUG) console.log(formattedDestination);
 
-if(DEBUG) console.log(`Reformatted destination to pass validation: ` + formattedDestination); 
+  // Check if username already exists
   return new Promise(function(resolve, reject) {
-    const sql = `INSERT INTO public."Profiles" (username, destination, hobbies) \
-    values ($1, $2, Array[$3]);`;
-    dal.query(sql, [username, formattedDestination, hobbies], (err, result) => {
-      if (err) {
-          if(DEBUG) console.log(err);
-          reject(err);
+    const checkUsernameSQL = `SELECT COUNT(*) AS count FROM public."Profiles" WHERE username = $1;`;
+    dal.query(checkUsernameSQL, [username], (checkErr, checkResult) => {
+      if (checkErr) {
+        reject(checkErr);
+      } else {
+        const usernameExists = checkResult.rows[0].count > 0;
+        if(DEBUG) console.log(usernameExists); 
+        if (usernameExists) {
+          reject({ status: 400, message: "Error: Username already taken." });
         } else {
-          resolve(result.rows);
+          // Username doesn't exist, proceed with insertion
+          const insertProfileSQL = `INSERT INTO public."Profiles" (username, destination, hobbies) VALUES ($1, $2, Array[$3]);`;
+          dal.query(insertProfileSQL, [username, formattedDestination, hobbies], (err, result) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result.rows);
+            }
+          });
         }
-    }); 
+      }
+    });
   });
 };
 

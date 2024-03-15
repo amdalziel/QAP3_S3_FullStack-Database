@@ -20,9 +20,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </head>
 <body>
 
+
     <div id="banner-profiles">
- 
-        <%- include('./partials/header.ejs') %>
+        
+        <div id="header-box">
+            <h1>Travel Bug</h1>
+            
+            <nav>
+                <a href="/">Home</a>
+                <a href="/profiles">Profiles</a>
+            </nav>
+            </div>
 
         <div id="banner-profiles-overlay"></div>
         <h2>Find Your Next Adventure</h2>
@@ -38,7 +46,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
             <h3>Create a Profile: </h3>
 
-            <h4>Avaliable Cities: London, Paris, Barcelona, Dubrovnik, Reykjavík, Amsterdam, Venice, Berlin</h4>
+            <h4>Avaliable Cities: London, Paris, Barcelona, Dubrovnik, Reykjavik, Amsterdam, Venice, Berlin</h4>
 
             <label>Username:    </label>
                 <input type="text" id="form-username" name="username" value="<%= locals.username %>" required>
@@ -91,7 +99,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
             </div>
         <% }); %>
     </div>
-
 
 
 
