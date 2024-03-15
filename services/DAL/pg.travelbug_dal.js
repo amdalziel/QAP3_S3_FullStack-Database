@@ -70,19 +70,19 @@ var patchProfile = function(id, username, destination, hobbies) {
 };
 
 
-// var deleteLogin = function(id) {
-//   if(DEBUG) console.log("logins.pg.dal.deleteLogin()");
-//   return new Promise(function(resolve, reject) {
-//     const sql = `DELETE FROM public."Logins" WHERE id = $1;`;
-//     dal.query(sql, [id], (err, result) => {
-//       if (err) {
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
+var deleteProfile = function(id) {
+  if(DEBUG) console.log("profiles.pg.dal.deleteProfile()");
+  return new Promise(function(resolve, reject) {
+    const sql = `DELETE FROM public."Profiles" WHERE id = $1;`;
+    dal.query(sql, [id], (err, result) => {
+      if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+};
 
 
 
@@ -90,4 +90,5 @@ module.exports = {
   getProfiles,
   getProfileByProfileID, 
   patchProfile, 
+  deleteProfile, 
 }
