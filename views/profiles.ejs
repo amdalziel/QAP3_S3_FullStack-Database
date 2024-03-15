@@ -32,6 +32,29 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
     <main>
 
+        <div id="create-profile-div">
+
+        <form action = '/profiles' method="POST">
+
+            <h3>Create a Profile: </h3>
+
+            <label>Username:
+                <input type="text" id="username" name="username" value="<%= locals.username %>" required>
+            </label>
+            <label>Destination:
+                <input type="text" id="destination" name="destination" value="<%= locals.destination %>" required>
+            </label>
+            <label>Hobbies:
+                <input type="text" id="hobbies" name="hobbies" value="<%= locals.hobbies %>" >
+            </label>
+       
+            <button>CREATE</button>
+
+
+        </form>
+
+    </div>
+
   
        
         <h3>Meet Our Travel Bugs</h3>
@@ -61,8 +84,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
             <p class="user-hobbies"><%= profile.hobbies %></p>
             </div>
 
-            <a href="/profiles/<%=profile.id%>/edit?username=<%=profile.username%>&destination=<%=profile.destination%>&hobbies=<%=profile.hobbies%>">Edit</a>
-            <a href="/profiles/<%=profile.id%>/delete?username=<%=profile.username%>">Delete</a>
+            <a class= "edit-btn" href="/profiles/<%=profile.id%>/edit?username=<%=profile.username%>&destination=<%=profile.destination%>&hobbies=<%=profile.hobbies%>">Edit</a>
+            <a class= "delete-btn" href="/profiles/<%=profile.id%>/delete?username=<%=profile.username%>">Delete</a>
             </div>
         <% }); %>
     </div>

@@ -11,6 +11,13 @@
     justify-content: space-between;
 }
 
+#create-profile-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5% 10%; 
+}
+
 
 .user-destination-div{
     display: flex;
@@ -40,6 +47,23 @@
 
 .user-profile p {
     padding: 5px; 
+}
+
+.user-profile a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px; 
+    margin-top: 5px; 
+    border-radius: 5px;
+}
+
+.edit-btn{
+background-color: rgb(1, 62, 1);
+}
+
+.delete-btn{
+    background-color: rgb(114, 3, 3);
 }
 
 .user-destinationImg {

@@ -27,6 +27,19 @@ router.get('/:id/edit', async (req, res) => {
   });
 
 
+  router.post('/', async (req, res) => {
+    if(DEBUG) console.log("profiles.POST");
+    try {
+        await profilesDal.addProfile(req.body.username, req.body.destination, req.body.hobbies);
+        res.redirect('/profiles');
+    } catch (err){
+   //     if(DEBUG) console.log(err);
+        // log this error to an error log file.
+        res.render('503');
+    } 
+  });
+
+
 
 
   router.patch('/:id', async (req, res) => {

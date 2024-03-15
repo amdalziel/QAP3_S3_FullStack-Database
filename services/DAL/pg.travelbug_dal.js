@@ -5,7 +5,7 @@ var getProfiles = function() {
   if(DEBUG) console.log("profiles.pg.dal.getProfiles()");
   return new Promise(function(resolve, reject) {
     const sql = `SELECT * FROM public."Profiles" \
-    ORDER BY id ASC ;`
+    ORDER BY id DESC ;`
     dal.query(sql, [], (err, result) => {
       if (err) {
         // logging should go here
@@ -36,21 +36,21 @@ var getProfileByProfileID = function(id) {
   }); 
 };
 
-// var addLogin = function(username, password, email, uuid) {
-//   if(DEBUG) console.log("logins.pg.dal.addLogin()");
-//   return new Promise(function(resolve, reject) {
-//     const sql = `INSERT INTO public."Logins"(username, password, email, uuid) \
-//         VALUES ($1, $2);`;
-//     dal.query(sql, [username, password], (err, result) => {
-//       if (err) {
-//           if(DEBUG) console.log(err);
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
+var addProfile = function(username, destination, hobbies) {
+  if(DEBUG) console.log("profiles.pg.dal.addProfile()");
+  return new Promise(function(resolve, reject) {
+    const sql = `INSERT INTO public."Profiles" (username, destination, hobbies) \
+    values ($1, $2, Array[$3]);`;
+    dal.query(sql, [username, destination, hobbies], (err, result) => {
+      if (err) {
+          if(DEBUG) console.log(err);
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+};
 
 
 var patchProfile = function(id, username, destination, hobbies) {
@@ -91,4 +91,5 @@ module.exports = {
   getProfileByProfileID, 
   patchProfile, 
   deleteProfile, 
+  addProfile, 
 }
