@@ -35,10 +35,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <div id="profile-section">
         <% profiles.forEach((profile, i) => { %>
             <div class="user-profile">
-                <!-- <img src="/images/productImage/aleProduct<%= i + 1 %>.jpg" alt="Ale Image" width="300px"> -->
+                <img class="user-destinationImg" src="" alt="Destination Image" width="100px">
             <p class="user-username"><%= profile.username %></p>
             <p class="user-destination"><%= profile.destination %></p>
             <p class="user-hobbies"><%= profile.hobbies %></p>
+            <a href="/profiles/<%=profile.id%>/edit?username=<%=profile.username%>&destination=<%=profile.destination%>&hobbies=<%=profile.hobbies%>">Edit</a>
+            <a href="/profiles/<%=profile.id%>/delete?username=<%=profile.username%>">Delete</a>
             </div>
         <% }); %>
     </div>
