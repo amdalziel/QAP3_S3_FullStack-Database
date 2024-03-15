@@ -54,10 +54,16 @@ router.get('/:id/edit', async (req, res) => {
     try {
         await profilesDal.patchProfile(req.params.id, req.body.username, req.body.destination, req.body.hobbies);
         res.redirect('/profiles');
-    } catch {
-        // log this error to an error log file.
+    } catch (err) {
+        if (err.status === 400) {
+            res.status(400).render('usernameError', { message: err.message });
+          } else {
+            // Handle other errors
+            res.status(500).render('errorPage', { message: 'An unexpected error occurred.' });
+
         res.render('503');
     }
+}
   });
 
 
