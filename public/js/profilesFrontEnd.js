@@ -30,7 +30,7 @@ userDestination.forEach((destination, i) => {
         destination.parentElement.parentElement.style.backgroundColor = 'rgba(217, 208, 193, 0.3)';
         userDestinationImg[i].src = '/images/dubrovnikImg1.jpg';  
             break;
-        case 'Reykjavík':
+        case 'Reykjavik':
         destination.parentElement.parentElement.style.backgroundColor = 'rgba(113, 102, 137, 0.3)';
         userDestinationImg[i].src = '/images/reykjavíkImg1.jpg';  
             break;
@@ -64,6 +64,24 @@ userDestination.forEach((destination, i) => {
         
     
 });
+
+
+document.getElementById("create-user-form").addEventListener("submit", function(e) {
+    console.log("validating... ")
+    const destinationInput = document.getElementById("form-destination");
+    const destinationValue = destinationInput.value.trim().toLowerCase();
+    let citiesh4 = document.getElementById("create-user-form").childNodes[3]; 
+    console.log(citiesh4);
+    let cityArray = ['london', 'paris', 'barcelona', 'dubrovnik', 'reykjavik', 'amsterdam', 'venice', 'berlin'];
+    if (!cityArray.includes(destinationValue)) {
+        e.preventDefault();
+        citiesh4.style.backgroundColor = 'rgb(114, 3, 3)';
+        citiesh4.style.padding = '25px 10px'; 
+        return false; 
+    } 
+    
+});
+
 
 
 
