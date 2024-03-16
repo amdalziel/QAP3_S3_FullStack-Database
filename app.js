@@ -11,9 +11,20 @@ app.use(express.urlencoded({extended: true})); // harvest values from the URL
 app.use(methodOverride('_method'));  // Override - HTML only recognizes PUT and GET 
 // Must override for PATCH, PUT, DELETE
 
+const profilesDal = require('./services/DAL/pg.travelbug_dal'); 
 
-app.get('/', (req, res) => {
-    res.render('index'); 
+app.get('/', async (req, res) => {
+    if(DEBUG) console.log('Root Route: /');
+    try {
+        let getProfiles = await profilesDal.getProfiles(); 
+        let numProfiles = getProfiles.length; 
+        if(DEBUG) console.log(numProfiles); 
+        res.render('index', {numProfiles: numProfiles}); 
+        
+    } catch (error) {
+        res.render('503');  
+    }
+  
 }); 
 
 // anything beginning with '/api' will go into this 
