@@ -78,7 +78,7 @@ var addProfile = function(username, destination, hobbies) {
         if (usernameExists) {
           reject({ status: 400, message: "Error: Username already taken." });
         } else {
-          // Username doesn't exist, proceed with insertion
+          
           const insertProfileSQL = `INSERT INTO public."Profiles" (username, destination, hobbies) VALUES ($1, $2, Array[$3]);`;
           dal.query(insertProfileSQL, [username, formattedDestination, hobbies], (err, result) => {
             if (err) {
@@ -96,19 +96,61 @@ var addProfile = function(username, destination, hobbies) {
 
 var patchProfile = function(id, username, destination, hobbies) {
   if(DEBUG) console.log("profiles.pg.dal.patchProfile()");
+  if(DEBUG) console.log(id, username, destination, hobbies); 
+
+  let trimmedDestination = destination.trim();
+  let formattedDestination =
+    trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+  if (DEBUG) console.log(formattedDestination);
+
+  // Check if username already exists
   return new Promise(function(resolve, reject) {
-    const sql = `UPDATE public."Profiles" \
-    SET username= $2, destination= $3, hobbies= Array[$4] \
-    WHERE id = $1;`;
-    dal.query(sql, [id, username, destination, hobbies], (err, result) => {
-      if (err) {
-          reject(err);
+    const checkPatchUsernameSQL = `SELECT COUNT(*) AS count FROM public."Profiles" WHERE NOT(id = $1) AND username = $2;`;
+    dal.query(checkPatchUsernameSQL, [id, username], (checkErr, checkResult) => {
+      if (checkErr) {
+        reject(checkErr);
+      } else {
+        const usernameExists = checkResult.rows[0].count > 0;
+        if(DEBUG) console.log(usernameExists); 
+        if (usernameExists) {
+          reject({ status: 400, message: "Error: Username already taken." });
         } else {
-          resolve(result.rows);
+          const sql = `UPDATE public."Profiles" \
+             SET username= $2, destination= $3, hobbies= Array[$4] \
+             WHERE id = $1;`;
+            dal.query(sql, [id, username, formattedDestination, hobbies], (err, result) => {
+              console.log(`In query` + username); 
+              if (err) {
+       
+                  reject(err);
+                } else {
+      
+                  resolve(result.rows);
+                }
+            }); 
+          };
         }
-    }); 
-  });
-};
+      }) 
+    })
+  }; 
+   
+
+
+  // return new Promise(function(resolve, reject) {
+  //   const sql = `UPDATE public."Profiles" \
+  //   SET username= $2, destination= $3, hobbies= Array[$4] \
+  //   WHERE id = $1;`;
+  //   dal.query(sql, [id, username, destination, hobbies], (err, result) => {
+  //     if (err) {
+  //       console.log('error fail'); 
+  //         reject(err);
+  //       } else {
+  //         console.log('success'); 
+  //         resolve(result.rows);
+  //       }
+  //   }); 
+  // });
+
 
 
 var deleteProfile = function(id) {
@@ -133,4 +175,4 @@ module.exports = {
   patchProfile, 
   deleteProfile, 
   addProfile, 
-}
+}; 
