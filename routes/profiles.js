@@ -41,7 +41,6 @@ router.get('/:id/edit', async (req, res) => {
             // Handle other errors
             res.status(500).render('errorPage', { message: 'An unexpected error occurred.' });
 
-        res.render('503');
     } 
 }
   });
@@ -61,7 +60,6 @@ router.get('/:id/edit', async (req, res) => {
             // Handle other errors
             res.status(500).render('errorPage', { message: 'An unexpected error occurred.' });
 
-        res.render('503');
     }
 }
   });
