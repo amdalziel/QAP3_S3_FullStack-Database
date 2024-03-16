@@ -61,7 +61,7 @@ var getProfileByProfileID = function(id) {
 var addProfile = function(username, destination, hobbies) {
   if (DEBUG) console.log("profiles.pg.dal.addProfile()");
 
-  let trimmedDestination = destination.trim();
+  let trimmedDestination = destination.trim().toLowerCase();
   let formattedDestination =
     trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
   if (DEBUG) console.log(formattedDestination);
@@ -98,7 +98,7 @@ var patchProfile = function(id, username, destination, hobbies) {
   if(DEBUG) console.log("profiles.pg.dal.patchProfile()");
   if(DEBUG) console.log(id, username, destination, hobbies); 
 
-  let trimmedDestination = destination.trim();
+  let trimmedDestination = destination.trim().toLowerCase();
   let formattedDestination =
     trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
   if (DEBUG) console.log(formattedDestination);
