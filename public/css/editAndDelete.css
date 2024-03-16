@@ -1,0 +1,31 @@
+.delete-content{
+    margin: 5%; 
+}
+
+#delete-form label{
+    margin-bottom: 2%;
+    margin-right: 2%; 
+}
+
+#delete-form button{
+    margin-bottom: 2%;
+    margin-left: 2%; 
+}
+
+.edit-content{
+    margin: 5%; 
+}
+
+#edit-form label{
+    margin-bottom: 2%;
+    margin-right: 2%; 
+}
+
+#edit-form button{
+    margin-bottom: 2%;
+    margin-left: 2%; 
+}
+
+#edit-form input{
+    margin-left: 1%; 
+}

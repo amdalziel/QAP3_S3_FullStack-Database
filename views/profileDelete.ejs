@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />  
     <link rel="stylesheet" type="text/css" href="/css/partials.css" />  
+    <link rel="stylesheet" type="text/css" href="/css/editAndDelete.css" />  
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,11 +23,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
     <body>
     
-        <div class="delete content">
-            <form action="/profiles/<%= locals.theId %>?_method=DELETE" method="POST">
-                <label>Confirm you wish to DELETE your profile: </br>
-                    <input type="text" id="<%= locals.theId %>" name="profile" value="<%= locals.username %>" readonly>
+        <div class="delete-content">
+            <form id="delete-form" action="/profiles/<%= locals.theId %>?_method=DELETE" method="POST">
+                <label>Confirm you wish to DELETE your profile: 
                 </label>
+                <input type="text" id="<%= locals.theId %>" name="profile" value="<%= locals.username %>" readonly>
                 <button>DELETE</button>
             </form>
         </div>
