@@ -37,7 +37,6 @@ var getProfileByProfileID = function(id) {
 };
 
 
-
 var addProfile = function(username, destination, hobbies) {
   if (DEBUG) console.log("profiles.pg.dal.addProfile()");
 
