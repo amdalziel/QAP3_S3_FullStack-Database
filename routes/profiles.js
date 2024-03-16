@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
 }); 
 
 
+
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('profile.Edit : ' + req.params.id);
     res.render('profilePatch.ejs', {username: req.query.username, destination: req.query.destination, hobbies: req.query.hobbies, theId: req.params.id});
@@ -25,6 +26,30 @@ router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('profile.Delete : ' + req.params.id);
     res.render('profileDelete.ejs', {username: req.query.username, theId: req.params.id});
   });
+
+
+
+router.get('/:id', async (req, res) => {
+  if(DEBUG) console.log('ROUTE: /profile/:id ' + req.url);
+  try {
+      let theProfile = await profilesDal.getProfileByProfileID(req.params.id); 
+      if(DEBUG) console.log(theProfile[0]); 
+      if(theProfile.length === 0) {
+          res.render('norecord');  
+      } else {
+      res.render('profile.ejs', {
+        username: theProfile[0].username,
+        destination: theProfile[0].destination,
+        hobbies: theProfile[0].hobbies,
+        theId: req.params.id
+      });
+      }
+  } catch {
+      // log this error to an error log file.
+      res.statusCode = 503;
+      res.json({message: "Service Unavailable", status: 503});
+  }
+});
 
 
   router.post('/', async (req, res) => {

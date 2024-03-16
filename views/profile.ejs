@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />  
+    <link rel="stylesheet" type="text/css" href="/css/partials.css" />  
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <title>Profile</title>
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+
+</script>
+</head>
+<body>
+
+
+    <div id="banner-profiles">
+        
+        <div id="header-box">
+            <h1>Travel Bug</h1>
+            
+            <nav>
+                <a href="/">Home</a>
+                <a href="/profiles">Profiles</a>
+            </nav>
+            </div>
+
+        <div id="banner-profiles-overlay"></div>
+        <h2>Find Your Next Adventure</h2>
+    </div>
+
+   
+
+    <main>
+
+  
+       
+        <h3>Welcome, <%= username %></h3>
+        <div id="profile-section">
+       
+            <div class="user-profile">
+                <img class="user-destinationImg" src="" alt="Destination Image" width="100px">
+            
+            <div class="user-username-div">
+                <span class="material-symbols-outlined">
+                    person
+                    </span>
+                <p class="user-username"><%= username %></p>
+            </div>
+
+            <div class="user-destination-div">
+            <span class="material-symbols-outlined">
+                explore
+                </span>
+            <p class="user-destination"><%= destination %></p>
+        </div>
+
+        <div class="user-hobbies-div">
+            <span class="material-symbols-outlined">
+                favorite
+                </span>
+            <p class="user-hobbies"><%= hobbies %></p>
+            </div>
+
+            </div>
+    
+    </div>
+
+
+
+    </main>
+
+
+    <script src="/js/profileFrontEnd.js"></script>
+    
+</body>
+</html>

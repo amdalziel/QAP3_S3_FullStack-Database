@@ -36,27 +36,7 @@ var getProfileByProfileID = function(id) {
   }); 
 };
 
-// var addProfile = function(username, destination, hobbies) {
-//   if(DEBUG) console.log("profiles.pg.dal.addProfile()");
 
-//   let trimmedDestination = destination.trim();
-//   let formattedDestination = trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
-//   if(DEBUG) console.log(formattedDestination); 
-
-// if(DEBUG) console.log(`Reformatted destination to pass validation: ` + formattedDestination); 
-//   return new Promise(function(resolve, reject) {
-//     const sql = `INSERT INTO public."Profiles" (username, destination, hobbies) \
-//     values ($1, $2, Array[$3]);`;
-//     dal.query(sql, [username, formattedDestination, hobbies], (err, result) => {
-//       if (err) {
-//           if(DEBUG) console.log(err);
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
 
 var addProfile = function(username, destination, hobbies) {
   if (DEBUG) console.log("profiles.pg.dal.addProfile()");
@@ -134,23 +114,6 @@ var patchProfile = function(id, username, destination, hobbies) {
     })
   }; 
    
-
-
-  // return new Promise(function(resolve, reject) {
-  //   const sql = `UPDATE public."Profiles" \
-  //   SET username= $2, destination= $3, hobbies= Array[$4] \
-  //   WHERE id = $1;`;
-  //   dal.query(sql, [id, username, destination, hobbies], (err, result) => {
-  //     if (err) {
-  //       console.log('error fail'); 
-  //         reject(err);
-  //       } else {
-  //         console.log('success'); 
-  //         resolve(result.rows);
-  //       }
-  //   }); 
-  // });
-
 
 
 var deleteProfile = function(id) {
