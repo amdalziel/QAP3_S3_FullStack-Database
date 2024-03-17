@@ -48,6 +48,12 @@
 .user-hobbies-div{
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.user-hobbies{
+    padding-right: 5px; 
+
 }
 
 .user-username-div{
@@ -173,5 +179,23 @@ h3{
     color:rgb(1, 62, 1);
     text-decoration: underline;
 }
+
+#patch-btn{
+    color: black; 
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    padding: 3px; 
+
+}
+
+
+#patch-btn:hover{
+    color: black; 
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    padding: 3px; 
+    background-color: rgba(255, 255, 255, 0.5);
+
+}
+
+
 
 

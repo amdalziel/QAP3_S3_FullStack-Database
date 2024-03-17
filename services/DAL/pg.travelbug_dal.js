@@ -73,9 +73,9 @@ var addProfile = function(username, destination, hobbies) {
 };
 
 
-// Patch (edit) a profile: 
-var patchProfile = function(id, username, destination, hobbies) {
-  if(DEBUG) console.log("profiles.pg.dal.patchProfile()");
+// PUT (edit) a profile: 
+var putProfile = function(id, username, destination, hobbies) {
+  if(DEBUG) console.log("profiles.pg.dal.putProfile()");
   if(DEBUG) console.log(id, username, destination, hobbies); 
 
   let formattedDestination = formatDestination(destination); 
@@ -110,6 +110,30 @@ var patchProfile = function(id, username, destination, hobbies) {
       }) 
     })
   }; 
+
+
+
+// PATCH (edit) a profile - add to the hobbies list: 
+var patchProfile = function(id, hobbies) {
+  if(DEBUG) console.log("profiles.pg.dal.patchProfile()");
+  if(DEBUG) console.log(id, hobbies); 
+
+  return new Promise(function(resolve, reject) {
+    const sql = `UPDATE public."Profiles" \
+    SET hobbies = hobbies || ARRAY[$2]
+    WHERE id = $1;
+    `;
+    dal.query(sql, [id, hobbies], (err, result) => {
+      if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+
+  }; 
+   
    
 
 // Delete a profile: 
@@ -145,7 +169,8 @@ function formatDestination(destination){
 module.exports = {
   getProfiles,
   getProfileByProfileID, 
-  patchProfile, 
+  putProfile, 
   deleteProfile, 
   addProfile, 
+  patchProfile, 
 }; 

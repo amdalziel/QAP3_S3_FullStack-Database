@@ -56,7 +56,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
             <label>Hobbies:</label>
                 <input type="text" id="form-hobbies" name="hobbies" value="<%= locals.hobbies %>" >
-          
        
             <input type="submit" value="Submit">
 
@@ -92,9 +91,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 favorite
                 </span>
             <p class="user-hobbies"><%= profile.hobbies %></p>
+            <a id="patch-btn" href="/profiles/<%=profile.id%>/patch?username=<%=profile.username%>&hobbies=<%=profile.hobbies%>">+</a>
             </div>
 
-            <a class= "edit-btn" href="/profiles/<%=profile.id%>/edit?username=<%=profile.username%>&destination=<%=profile.destination%>&hobbies=<%=profile.hobbies%>">Edit</a>
+            <a class= "edit-btn" href="/profiles/<%=profile.id%>/put?username=<%=profile.username%>&destination=<%=profile.destination%>&hobbies=<%=profile.hobbies%>">Edit</a>
             <a class= "delete-btn" href="/profiles/<%=profile.id%>/delete?username=<%=profile.username%>">Delete</a>
             </div>
         <% }); %>
