@@ -9,7 +9,23 @@ router.get('/', async (req, res) => {
         let theProfiles = await profilesDal.getProfiles(); 
         res.json(theProfiles);
     } catch {
-        // log this error to an error log file.
+        res.statusCode = 503;
+        res.json({message: "Service Unavailable", status: 503});
+    }
+});
+
+
+// api/profiles/:id
+router.get('/:id', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/profile/:id GET ' + req.url);
+    try {
+        let theProfile = await profilesDal.getProfileByProfileID(req.params.id); 
+        if(theProfile.length === 0) {
+            res.render('norecord');  
+        } else {
+        res.json(theProfile);
+        }
+    } catch {
         res.statusCode = 503;
         res.json({message: "Service Unavailable", status: 503});
     }

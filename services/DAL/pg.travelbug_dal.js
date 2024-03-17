@@ -1,6 +1,6 @@
 const dal = require('../pg.travelbug_db');
 
-//get all logins.
+// Get all profiles: 
 var getProfiles = function() {
   if(DEBUG) console.log("profiles.pg.dal.getProfiles()");
   return new Promise(function(resolve, reject) {
@@ -18,6 +18,7 @@ var getProfiles = function() {
   }); 
 };
 
+// Get ONE profile (by profile ID): 
 var getProfileByProfileID = function(id) {
   if(DEBUG) console.log("logins.pg.dal.getProfileByProfileID()");
   return new Promise(function(resolve, reject) {
@@ -26,7 +27,6 @@ var getProfileByProfileID = function(id) {
 	WHERE id=$1; `;
     dal.query(sql, [id], (err, result) => {
       if (err) {
-        // logging should go here
         if(DEBUG) console.log(err);
         reject(err);
       } else {
@@ -37,15 +37,15 @@ var getProfileByProfileID = function(id) {
 };
 
 
+// Add a profile: 
+// 2. Validate that the username is not already in use by another profile 
+// 3. INSERT SQL - add new profile to database 
 var addProfile = function(username, destination, hobbies) {
   if (DEBUG) console.log("profiles.pg.dal.addProfile()");
 
-  let trimmedDestination = destination.trim().toLowerCase();
-  let formattedDestination =
-    trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+  let formattedDestination = formatDestination(destination); 
   if (DEBUG) console.log(formattedDestination);
 
-  // Check if username already exists
   return new Promise(function(resolve, reject) {
     const checkUsernameSQL = `SELECT COUNT(*) AS count FROM public."Profiles" WHERE username = $1;`;
     dal.query(checkUsernameSQL, [username], (checkErr, checkResult) => {
@@ -73,16 +73,14 @@ var addProfile = function(username, destination, hobbies) {
 };
 
 
+// Patch (edit) a profile: 
 var patchProfile = function(id, username, destination, hobbies) {
   if(DEBUG) console.log("profiles.pg.dal.patchProfile()");
   if(DEBUG) console.log(id, username, destination, hobbies); 
 
-  let trimmedDestination = destination.trim().toLowerCase();
-  let formattedDestination =
-    trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+  let formattedDestination = formatDestination(destination); 
   if (DEBUG) console.log(formattedDestination);
 
-  // Check if username already exists
   return new Promise(function(resolve, reject) {
     const checkPatchUsernameSQL = `SELECT COUNT(*) AS count FROM public."Profiles" WHERE NOT(id = $1) AND username = $2;`;
     dal.query(checkPatchUsernameSQL, [id, username], (checkErr, checkResult) => {
@@ -114,7 +112,7 @@ var patchProfile = function(id, username, destination, hobbies) {
   }; 
    
 
-
+// Delete a profile: 
 var deleteProfile = function(id) {
   if(DEBUG) console.log("profiles.pg.dal.deleteProfile()");
   return new Promise(function(resolve, reject) {
@@ -128,6 +126,19 @@ var deleteProfile = function(id) {
     }); 
   });
 };
+
+
+
+//  -----------------------------------------------------
+
+// Function used in above CRUD methods: 
+
+function formatDestination(destination){
+  let trimmedDestination = destination.trim().toLowerCase();
+  let formattedDestination =
+    trimmedDestination.charAt(0).toUpperCase() + trimmedDestination.slice(1);
+    return formattedDestination; 
+}; 
 
 
 

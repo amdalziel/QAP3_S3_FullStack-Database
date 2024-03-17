@@ -15,20 +15,21 @@ router.get('/', async (req, res) => {
 }); 
 
 
-
+// CRUD Operation: PATCH (takes user to profilePatch.ejs)
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('profile.Edit : ' + req.params.id);
     res.render('profilePatch.ejs', {username: req.query.username, destination: req.query.destination, hobbies: req.query.hobbies, theId: req.params.id});
   });
 
 
+  // CRUD Operation: DELETE (takes user to profileDelete.ejs)
   router.get('/:id/delete', async (req, res) => {
     if(DEBUG) console.log('profile.Delete : ' + req.params.id);
     res.render('profileDelete.ejs', {username: req.query.username, theId: req.params.id});
   });
 
 
-
+// Display ONE profile (selected by the user in the browser as the id)
 router.get('/:id', async (req, res) => {
   if(DEBUG) console.log('ROUTE: /profile/:id ' + req.url);
   try {
@@ -45,13 +46,13 @@ router.get('/:id', async (req, res) => {
       });
       }
   } catch {
-      // log this error to an error log file.
       res.statusCode = 503;
       res.json({message: "Service Unavailable", status: 503});
   }
 });
 
 
+  // CRUD Operation: POST (user adds a profile on the profiles.ejs page)
   router.post('/', async (req, res) => {
     if(DEBUG) console.log("profiles.POST");
     try {
@@ -61,10 +62,9 @@ router.get('/:id', async (req, res) => {
     } catch (err){
    
         if (err.status === 400) {
-            res.status(400).render('usernameError', { message: err.message });
+            res.status(400).render('usernameError');
           } else {
-            // Handle other errors
-            res.status(500).render('errorPage', { message: 'An unexpected error occurred.' });
+            res.status(500).render('errorPage');
 
     } 
 }

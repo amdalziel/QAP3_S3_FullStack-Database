@@ -12,8 +12,5 @@ router.get('/', (req, res) => {
 const profilesRouter = require('./profiles')
 router.use('/profiles', profilesRouter);
 
-// http://localhost:3000/api/profile/:id
-const profileRouter = require('./profile')
-router.use('/profile', profileRouter);
 
 module.exports = router;

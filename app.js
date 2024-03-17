@@ -13,6 +13,8 @@ app.use(methodOverride('_method'));  // Override - HTML only recognizes PUT and 
 
 const profilesDal = require('./services/DAL/pg.travelbug_dal'); 
 
+// Root Route. 
+// Number of profiles displayed on the root. getProfiles() gets number of profiles 
 app.get('/', async (req, res) => {
     if(DEBUG) console.log('Root Route: /');
     try {
@@ -35,6 +37,7 @@ app.use('/api', apiRouter);
 // anything beginning with '/profiles' will go into this 
 const profilesRouter = require('./routes/profiles');
 app.use('/profiles', profilesRouter); 
+
 
 app.listen(port, () => {
     if(DEBUG) console.log(`Travel Bug App running on port ${port}`);
