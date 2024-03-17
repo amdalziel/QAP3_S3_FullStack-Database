@@ -15,11 +15,18 @@ router.get('/', async (req, res) => {
 }); 
 
 
-// CRUD Operation: PATCH (takes user to profilePatch.ejs)
-router.get('/:id/edit', async (req, res) => {
-    if(DEBUG) console.log('profile.Edit : ' + req.params.id);
-    res.render('profilePatch.ejs', {username: req.query.username, destination: req.query.destination, hobbies: req.query.hobbies, theId: req.params.id});
+// CRUD Operation: PUT (takes user to profilePut.ejs)
+router.get('/:id/put', async (req, res) => {
+    if(DEBUG) console.log('profile.Put : ' + req.params.id);
+    res.render('profilePut.ejs', {username: req.query.username, destination: req.query.destination, hobbies: req.query.hobbies, theId: req.params.id});
   });
+
+
+  // CRUD Operation: PATCH (takes user to profilePatch.ejs)
+router.get('/:id/patch', async (req, res) => {
+  if(DEBUG) console.log('profile.Put : ' + req.params.id);
+  res.render('profilePatch.ejs', {username: req.query.username, hobbies: req.query.hobbies, theId: req.params.id});
+});
 
 
   // CRUD Operation: DELETE (takes user to profileDelete.ejs)
@@ -73,10 +80,10 @@ router.get('/:id', async (req, res) => {
 
 
 
-  router.patch('/:id', async (req, res) => {
-    if(DEBUG) console.log('profiles.PATCH: ' + req.params.id);
+  router.put('/:id', async (req, res) => {
+    if(DEBUG) console.log('profiles.PUT: ' + req.params.id);
     try {
-        await profilesDal.patchProfile(req.params.id, req.body.username, req.body.destination, req.body.hobbies);
+        await profilesDal.putProfile(req.params.id, req.body.username, req.body.destination, req.body.hobbies);
         res.redirect('/profiles');
     } catch (err) {
         if (err.status === 400) {
@@ -86,6 +93,17 @@ router.get('/:id', async (req, res) => {
             res.status(500).render('errorPage', { message: 'An unexpected error occurred.' });
 
     }
+}
+  });
+
+
+  router.patch('/:id', async (req, res) => {
+    if(DEBUG) console.log('profiles.PATCH: ' + req.params.id);
+    try {
+        await profilesDal.patchProfile(req.params.id, req.body.hobbies);
+        res.redirect('/profiles');
+    } catch (err) {
+            res.render('503'); 
 }
   });
 
