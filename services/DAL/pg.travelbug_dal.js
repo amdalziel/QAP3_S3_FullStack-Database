@@ -99,7 +99,6 @@ var putProfile = function(id, username, destination, hobbies) {
              SET username= $2, destination= $3, hobbies= $4 \
              WHERE id = $1;`;
             dal.query(sql, [id, username, formattedDestination, addHobbies], (err, result) => {
-              console.log(`In query` + username); 
               if (err) {
        
                   reject(err);
@@ -171,14 +170,8 @@ function formatDestination(destination){
 
 function formatHobbyArray(hobbies){
   let divideHobbies = hobbies.split(","); 
-  console.log(divideHobbies); 
-  // let addHobbies = ""; 
-  // for(let i = 0; i < divideHobbies.length; i ++) {
-  //   addHobbies += divideHobbies[i] + ","; 
-  // }
-  // addHobbies = addHobbies.slice(0, -1); 
-
-  // if(DEBUG) console.log(addHobbies); 
+  if(DEBUG) console.log(divideHobbies); 
+  
   return divideHobbies; 
 }
 
