@@ -39,6 +39,11 @@ const profilesRouter = require('./routes/profiles');
 app.use('/profiles', profilesRouter); 
 
 
+app.use((req, res) => {
+    res.status(404).render('404');
+  });
+
+
 app.listen(port, () => {
     if(DEBUG) console.log(`Travel Bug App running on port ${port}`);
 }); 
