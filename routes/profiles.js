@@ -53,8 +53,7 @@ router.get('/:id', async (req, res) => {
       });
       }
   } catch {
-      res.statusCode = 503;
-      res.json({message: "Service Unavailable", status: 503});
+      res.render('503'); 
   }
 });
 
@@ -71,7 +70,7 @@ router.get('/:id', async (req, res) => {
         if (err.status === 400) {
             res.status(400).render('usernameError');
           } else {
-            res.status(500).render('errorPage');
+            res.render('503'); 
 
     } 
 }

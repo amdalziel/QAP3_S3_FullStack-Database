@@ -8,7 +8,6 @@ var getProfiles = function() {
     ORDER BY id DESC ;`
     dal.query(sql, [], (err, result) => {
       if (err) {
-        // logging should go here
         if(DEBUG) console.log(err);
         reject(err);
       } else {
@@ -38,8 +37,6 @@ var getProfileByProfileID = function(id) {
 
 
 // Add a profile: 
-// 2. Validate that the username is not already in use by another profile 
-// 3. INSERT SQL - add new profile to database 
 var addProfile = function(username, destination, hobbies) {
   if (DEBUG) console.log("profiles.pg.dal.addProfile()");
 
@@ -57,9 +54,11 @@ var addProfile = function(username, destination, hobbies) {
         if (usernameExists) {
           reject({ status: 400, message: "Error: Username already taken." });
         } else {
+
+          let addHobbies = formatHobbyArray(hobbies); 
           
-          const insertProfileSQL = `INSERT INTO public."Profiles" (username, destination, hobbies) VALUES ($1, $2, Array[$3]);`;
-          dal.query(insertProfileSQL, [username, formattedDestination, hobbies], (err, result) => {
+          const insertProfileSQL = `INSERT INTO public."Profiles" (username, destination, hobbies) VALUES ($1, $2, $3);`;
+          dal.query(insertProfileSQL, [username, formattedDestination, addHobbies], (err, result) => {
             if (err) {
               reject(err);
             } else {
@@ -171,7 +170,7 @@ function formatDestination(destination){
 function formatHobbyArray(hobbies){
   let divideHobbies = hobbies.split(","); 
   if(DEBUG) console.log(divideHobbies); 
-  
+
   return divideHobbies; 
 }
 

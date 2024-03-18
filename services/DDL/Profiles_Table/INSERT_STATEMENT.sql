@@ -1,7 +1,8 @@
 -- INSERT Statement for Profiles Table 
 
 -- SQL statement for POST operation (add profile)
-INSERT INTO public."Profiles" (username, destination, hobbies) values ($1, $2, Array[$3]);
+-- Note: hobbies ($3) must be passed in as an ARRAY value.
+INSERT INTO public."Profiles" (username, destination, hobbies) values ($1, $2, $3);
 
 
 -- Mockaroo Data entered into the database: 

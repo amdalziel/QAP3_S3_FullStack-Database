@@ -10,7 +10,7 @@ UPDATE public."Profiles"
 
 
 -- SQL PUT Statement: 
--- Note: hobbies ($4) must be passed through as an array 
+-- Note: hobbies ($4) must be passed through as an ARRAY 
 
 UPDATE public."Profiles" 
              SET username= $2, destination= $3, hobbies= $4 
@@ -21,7 +21,7 @@ UPDATE public."Profiles"
 
 
 -- PATCH OPERATION: 
--- Note: addition to hobbies ($2) must be passed through as an array 
+-- Note: addition to hobbies ($2) must be passed through as an ARRAY 
 
 UPDATE public."Profiles" 
     SET hobbies = hobbies || $2  
